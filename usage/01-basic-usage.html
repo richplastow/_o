@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ok Basic Usage</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="usage.css">
+  <script src="../build/ok.js"></script>
+  <script>
+addEventListener('load', function () {
+    var i, l
+
+        //// Get the `ok()` logger. 
+      , ok = Ok.get(window, 'Ok Basic Usage', '1.2.3')
+
+        //// Element refs. 
+      , $$actions = document.querySelectorAll('#actions .button')
+      , $log      = document.getElementById('log')
+
+    ;
+
+    //// Enable the action buttons. 
+    for (i=0, l=$$actions.length; i<l; i++) {
+        $$actions[i].addEventListener('click', function (event) {
+            event.preventDefault();
+            try {
+                var result = eval(this.innerHTML);
+                $log.innerHTML = result;
+            } catch (error) {
+                $log.innerHTML = 'Error:\n\n' + error;
+                return;
+            }
+        });
+    }
+
+    $log.innerHTML = 'Ready.';
+});
+  </script>
+</head>
+<body>
+  <header>
+    <a href="../index.html" title="Ok Homepage">Ok</a><span
+    >/</span><a href="../index.html#/doc/usage" title="Ok Usage">Usage</a><span
+    >/</span><a href="01-basic-usage.html" title="Refresh this page">Ok Basic Usage</a>
+  </header>
+  <main>
+    <nav id="actions">
+      <a href="#" class="button">ok('abc', 123);</a><a
+         href="#" class="button">ok.T;</a><a
+         href="#" class="button">ok.is(true, 'yes', 'no');</a>
+    </nav>
+    <pre id="log">Loading...</pre>
+  </main>
+  <footer>
+    <a href="http://richplastow.com/" title="Rich Plastow Homepage">Rich Plastow 2015</a>
+  </footer>
+</body>
+</html>
